@@ -2,7 +2,7 @@ create database if not exists TakeCare;
 Use TakeCare;
 Create table if not exists Contact_Type (
 	Id_Contact_Type int not null auto_increment,
-	Name_Contact varchar(100) not null,
+	Name_Contact varchar(100) not null unique,
     primary key (Id_Contact_Type)
     );
 create table if not exists Contact (
@@ -15,13 +15,13 @@ create table if not exists Contact (
     
 create table if not exists Country (
 	Id_Country int not null auto_increment,
-    Country_Name varchar(50) not null,
+    Country_Name varchar(50) not null unique,
     primary key (Id_Country)
 );
 
 create table if not exists State (
 	Id_State int not null auto_increment,
-    State_Name varchar(50) not null,
+    State_Name varchar(50) not null unique,
     primary key (Id_State),
     Fk_Country int not null,
 	foreign key (FK_Country) references Country (Id_Country)
@@ -46,9 +46,9 @@ create table if not exists Address (
 );
 create table if not exists Costumer (
 	Id_Costumer int not null auto_increment,
-    Costumer_name varchar(300),
-    Document_Number varchar (30),
-    Date_Birth date,
+    Costumer_name varchar(300) not null,
+    Document_Number varchar (30) not null unique,
+    Date_Birth date not null,
     primary key (Id_Costumer),
     Fk_Address int not null,
     FK_Contact int not null,
